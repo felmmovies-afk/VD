@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VD WEB | We Build Your Digital Future</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #040711;
+            --bg-surface: #0b1121;
+            --bg-glass: rgba(15, 23, 42, 0.65);
+            --primary: #2563eb;
+            --cyan: #06b6d4;
+            --purple: #7c3aed;
+            --text-white: #f8fafc;
+            --text-muted: #94a3b8;
+            --whatsapp: #25D366;
+            --facebook: #1877F2;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.14) 0%, transparent 40%),
+                radial-gradient(circle at 85% 35%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 85%, rgba(124, 58, 237, 0.12) 0%, transparent 45%);
+        }
+
+        h1, h2, h3, .logo-title {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Grid Pattern Overlay */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 16px 7%;
+            background: rgba(4, 7, 17, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.45);
+            transition: transform 0.4s ease;
+        }
+
+        .brand:hover img {
+            transform: rotate(8deg) scale(1.05);
+        }
+
+        .logo-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-white);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--cyan));
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-fb-mini {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(24, 119, 242, 0.15);
+            border: 1px solid rgba(24, 119, 242, 0.4);
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-fb-mini:hover {
+            background: var(--facebook);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-nav-cta {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--primary), var(--cyan));
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
+            transition: 0.3s;
+        }
+
+        .btn-nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.55);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 150px 7% 90px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.35);
+            border-radius: 50px;
+            color: var(--cyan);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--cyan), var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-lead {
+            font-size: 1.2rem;
+            color: var(--text-white);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-glow {
+            padding: 15px 34px;
+            background: linear-gradient(135deg, var(--primary), var(--cyan));
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.6);
+        }
+
+        .btn-glass {
+            padding: 15px 30px;
+            background: var(--bg-glass);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .btn-glass:hover {
+            border-color: var(--facebook);
+            background: rgba(24, 119, 242, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Visual Card */
+        .hero-visual {
+            position: relative;
+        }
+
+        .visual-frame {
+            position: relative;
+            border-radius: 28px;
+            padding: 12px;
+            background: linear-gradient(145deg, rgba(6, 182, 212, 0.3), rgba(124, 58, 237, 0.15));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            animation: floatHero 6s ease-in-out infinite;
+        }
+
+        .visual-frame img {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: rgba(11, 17, 33, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            padding: 14px 22px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .floating-badge i {
+            font-size: 1.5rem;
+            color: var(--cyan);
+        }
+
+        @keyframes floatHero {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+
+        /* Section Layout */
+        section {
+            padding: 100px 7%;
+        }
+
+        .sec-head {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 65px;
+        }
+
+        .sec-tag {
+            color: var(--cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .sec-head h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .sec-head p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .srv-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 36px 30px;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .srv-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.5), transparent, rgba(124, 58, 237, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: 0.4s;
+            pointer-events: none;
+        }
+
+        .srv-card:hover {
+            transform: translateY(-10px);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .srv-card:hover::after {
+            opacity: 1;
+        }
+
+        .srv-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--cyan);
+            margin-bottom: 24px;
+        }
+
+        .srv-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            color: var(--text-white);
+        }
+
+        .srv-card p {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 1.65;
+        }
+
+        /* About & Why Choose Us Split Section */
+        .why-section {
+            background: linear-gradient(180deg, transparent, rgba(11, 17, 33, 0.8), transparent);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .why-img-box {
+            position: relative;
+        }
+
+        .why-img-box img {
+            width: 100%;
+            border-radius: 26px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .vision-quote {
+            margin-top: 20px;
+            padding: 20px 24px;
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 4px solid var(--cyan);
+            border-radius: 0 16px 16px 0;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #e2e8f0;
+        }
+
+        .why-list {
+            display: grid;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 18px 22px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .why-item:hover {
+            border-color: rgba(6, 182, 212, 0.45);
+            transform: translateX(8px);
+        }
+
+        .check-circle {
+            min-width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .why-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--text-white);
+        }
+
+        .why-item p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Box */
+        .cta-box {
+            margin: 30px 7% 90px;
+            padding: 75px 40px;
+            border-radius: 32px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(6, 182, 212, 0.15), rgba(124, 58, 237, 0.22));
+            border: 1px solid rgba(6, 182, 212, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box h2 {
+            font-size: 2.7rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-box p {
+            max-width: 650px;
+            margin: 0 auto 34px;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn-wa {
+            padding: 16px 34px;
+            background: var(--whatsapp);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+            transition: 0.3s;
+        }
+
+        .btn-wa:hover {
+            background: #20bd5a;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(37, 211, 102, 0.55);
+        }
+
+        .btn-fb {
+            padding: 16px 34px;
+            background: var(--facebook);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 10px 25px rgba(24, 119, 242, 0.35);
+            transition: 0.3s;
+        }
+
+        .btn-fb:hover {
+            background: #1464cc;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(24, 119, 242, 0.55);
+        }
+
+        /* Footer */
+        footer {
+            background: #02040a;
+            border-top: 1px solid var(--border-glass);
+            padding: 60px 7% 30px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+        }
+
+        .footer-tagline {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .footer-socials a {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-socials a.fb:hover { background: var(--facebook); border-color: var(--facebook); transform: translateY(-4px); }
+        .footer-socials a.wa:hover { background: var(--whatsapp); border-color: var(--whatsapp); transform: translateY(-4px); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-glass);
+            padding-top: 24px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Floating WhatsApp */
+        .wa-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 62px;
+            height: 62px;
+            background: var(--whatsapp);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.12);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero, .why-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero h1 { font-size: 2.8rem; }
+            .hero-desc { margin: 0 auto 30px; }
+            .hero-btns { justify-content: center; }
+            .floating-badge { left: 10px; bottom: -15px; }
+            .vision-quote { text-align: left; }
+            .why-item { text-align: left; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <a href="#home" class="brand">
+            <img src="ne.jpg" alt="VD WEB Logo">
+            <span class="logo-title">VD WEB</span>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Our Services</a></li>
+                <li><a href="#why-us">Why VD WEB</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="https://facebook.com/vdw3b" target="_blank" class="btn-fb-mini" title="VD WEB on Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/3197058025492?text=Hello%20VD%20WEB!%20I%20want%20to%20build%20a%20website." target="_blank" class="btn-nav-cta">
+                <i class="fab fa-whatsapp"></i> Start Now
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div>
+            <div class="hero-pill">
+                <span>🚀 VD WEB | We Build Your Digital Future</span>
+            </div>
+            <h1>Turning Ideas Into <span>Digital Reality. 🌐</span></h1>
+            <p class="hero-lead">At VD WEB, we turn your ideas into powerful digital experiences.</p>
+            <p class="hero-desc">
+                We specialize in designing and developing modern, professional, and responsive websites that help businesses grow, stand out, and succeed online.
+            </p>
+
+            <div class="hero-btns">
+                <a href="https://wa.me/3197058025492?text=Hello%20VD%20WEB!%20I'm%20interested%20in%20your%20web%20development%20services." target="_blank" class="btn-glow">
+                    <i class="fab fa-whatsapp"></i> Order Your Website
+                </a>
+                <a href="https://facebook.com/vdw3b" target="_blank" class="btn-glass">
+                    <i class="fab fa-facebook"></i> Official Page (vdw3b)
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="visual-frame">
+                <img src="dv.jpg" alt="VD WEB Web Development Showcase">
+            </div>
+            <div class="floating-badge">
+                <i class="fas fa-code"></i>
+                <div>
+                    <strong style="display:block; font-size:0.95rem;">100% Custom & Responsive</strong>
+                    <span style="font-size:0.8rem; color:var(--text-muted);">Modern Web Architecture</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="sec-head">
+            <span class="sec-tag">What We Do</span>
+            <h2>💻 Our Services</h2>
+            <p>From sleek business landing pages to full-scale e-commerce platforms, we engineer web solutions designed for growth and impact.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Professional Website Design & Development</h3>
+                <p>Complete end-to-end website design and coding using modern web technologies that reflect your brand identity with precision.</p>
+            </div>
+
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-building"></i></div>
+                <h3>Business & Corporate Websites</h3>
+                <p>High-credibility corporate websites tailored to showcase your company profile, attract B2B/B2C clients, and build lasting trust.</p>
+            </div>
+
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-shopping-bag"></i></div>
+                <h3>E-commerce & Online Stores</h3>
+                <p>Powerful, easy-to-manage online stores built to maximize sales, featuring smooth product browsing and secure checkout flows.</p>
+            </div>
+
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-layer-group"></i></div>
+                <h3>Landing Pages & Portfolio Websites</h3>
+                <p>High-converting marketing landing pages and creative personal portfolios designed to capture leads and impress visitors instantly.</p>
+            </div>
+
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-microchip"></i></div>
+                <h3>Custom Web Solutions</h3>
+                <p>Bespoke web features, interactive tools, and tailored systems built from scratch to match your exact business requirements.</p>
+            </div>
+
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                <h3>Mobile-Friendly & Responsive Designs</h3>
+                <p>Fluid layouts that automatically adapt to every screen size—smartphones, tablets, laptops, and large monitors.</p>
+            </div>
+
+            <div class="srv-card">
+                <div class="srv-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                <h3>SEO-Friendly Websites</h3>
+                <p>Clean semantic HTML structure, fast load speeds, and search-engine optimization best practices to boost your Google visibility.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-section" id="why-us">
+        <div class="why-grid">
+            <div class="why-img-box">
+                <img src="dv.jpg" alt="Why Choose VD WEB">
+                <div class="vision-quote">
+                    "Your vision. Our creativity. Unlimited possibilities."
+                </div>
+            </div>
+
+            <div>
+                <span class="sec-tag" style="text-align:left;">The VD WEB Advantage</span>
+                <h2 style="font-size:2.6rem; margin-bottom:14px;">🔥 Why Choose VD WEB?</h2>
+                <p style="color:var(--text-muted);">
+                    We combine artistic UI/UX design with rock-solid engineering to ensure your website doesn't just look amazing—it performs flawlessly.
+                </p>
+
+                <div class="why-list">
+                    <div class="why-item">
+                        <div class="check-circle"><i class="fas fa-check"></i></div>
+                        <div>
+                            <h4>Modern & Creative Designs</h4>
+                            <p>Unique, eye-catching interfaces crafted with the latest design trends to set you apart from competitors.</p>
+                        </div>
+                    </div>
+
+                    <div class="why-item">
+                        <div class="check-circle"><i class="fas fa-bolt"></i></div>
+                        <div>
+                            <h4>High Performance & Fast Loading</h4>
+                            <p>Optimized assets and clean code ensure lightning-fast loading times that keep visitors engaged.</p>
+                        </div>
+                    </div>
+
+                    <div class="why-item">
+                        <div class="check-circle"><i class="fas fa-sparkles"></i></div>
+                        <div>
+                            <h4>Premium User Experience</h4>
+                            <p>Intuitive navigation and smooth interactions that guide your visitors effortlessly toward action.</p>
+                        </div>
+                    </div>
+
+                    <div class="why-item">
+                        <div class="check-circle"><i class="fas fa-mobile-alt"></i></div>
+                        <div>
+                            <h4>Mobile-First Development</h4>
+                            <p>Engineered primarily for mobile users while scaling seamlessly up to widescreen desktops.</p>
+                        </div>
+                    </div>
+
+                    <div class="why-item">
+                        <div class="check-circle"><i class="fas fa-shield-check"></i></div>
+                        <div>
+                            <h4>Reliable & Professional Solutions</h4>
+                            <p>Dedicated support, transparent communication, and dependable delivery you can count on.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <div class="cta-box" id="contact">
+        <h2>Let's Build Your Digital Future Together 🚀</h2>
+        <p>
+            Have an idea for a website or want to upgrade your online presence? Reach out directly via WhatsApp or follow our official Facebook page.
+        </p>
+        <div class="cta-group">
+            <a href="https://wa.me/3197058025492?text=Hello%20VD%20WEB!%20I%20would%20like%20to%20discuss%20a%20new%20website%20project." target="_blank" class="btn-wa">
+                <i class="fab fa-whatsapp"></i> WhatsApp: +31 970 580 25492
+            </a>
+            <a href="https://facebook.com/vdw3b" target="_blank" class="btn-fb">
+                <i class="fab fa-facebook-f"></i> Follow facebook.com/vdw3b
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <img src="ne.jpg" alt="VD WEB Logo">
+            <span class="logo-title">VD WEB</span>
+        </div>
+        <p class="footer-tagline">VD WEB – Turning Ideas Into Digital Reality. 🌐</p>
+
+        <div class="footer-socials">
+            <a href="https://facebook.com/vdw3b" target="_blank" class="fb" title="Facebook Page">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/3197058025492" target="_blank" class="wa" title="WhatsApp Direct">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 <strong>VD WEB</strong>. All Rights Reserved. | Your vision. Our creativity. Unlimited possibilities.
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/3197058025492?text=Hello%20VD%20WEB!" target="_blank" class="wa-float" title="Chat with VD WEB on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
